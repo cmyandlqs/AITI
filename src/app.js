@@ -164,7 +164,7 @@ function renderWelcome() {
   app.innerHTML = `
     <!-- Top Banner -->
     <div class="top-banner">
-      NEW 已支持 AITI 交叉解读，完成测试后即可解锁
+      <a href="https://github.com/cmyandlqs/AITI" target="_blank" style="color:white;text-decoration:none;">GitHub 开源项目 · 欢迎 Star ⭐</a>
       <span>2026 · v1.0 · <img src="assets/images/方源大头照.jpg" class="banner-avatar" /> sikm</span>
     </div>
 
@@ -173,6 +173,10 @@ function renderWelcome() {
       <div class="hero-pill">AITI 人格测试</div>
       <h1 class="hero-title">AITI 人格测试 ——<br>你是哪种AI交互人格？</h1>
       <p class="hero-subtitle">通过 26 道趣味问答，分析你的提示词风格、AI 关系投射、使用场景和伦理态度，匹配出专属的 AI 使用人格。</p>
+
+      <div class="visit-counter">
+        本站已被测试 <span id="busuanzi_value_site_pv">--</span> 次
+      </div>
 
       <div class="hero-grid">
         <div class="hero-info-block">
@@ -390,7 +394,7 @@ function renderResult() {
         <!-- Footer -->
         <div class="result-footer">
           <p>AITI - AI 使用人格测试 · 仅供娱乐</p>
-          <p>灵感来自 SBTI · <a href="https://github.com/cmyandlqs/AITI" target="_blank" style="color:var(--primary);text-decoration:none;">开源项目欢迎 Star ⭐</a></p>
+          <p>灵感来自 SBTI · <a href="https://mp.weixin.qq.com/s/R5PCIcL4uANCNThcqtZPag" target="_blank" style="color:var(--primary);text-decoration:none;">量子位公众号</a> · <a href="https://github.com/cmyandlqs/AITI" target="_blank" style="color:var(--primary);text-decoration:none;">开源项目欢迎 Star ⭐</a></p>
           <p><img src="assets/images/方源大头照.jpg" class="footer-avatar" /> sikm</p>
         </div>
 

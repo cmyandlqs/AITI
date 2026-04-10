@@ -10,7 +10,45 @@ const state = {
   hiddenAnswers: {},  // { triggerType: score }
   userVector: [],
   result: null,
+  shuffledQuestions: [], // randomized question order
 };
+
+// ==================== 题目随机化 ====================
+
+/**
+ * Fisher-Yates 洗牌
+ */
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/**
+ * 按维度分组打乱：维度间顺序随机，同维度内两题顺序随机
+ */
+function shuffleQuestions() {
+  // Group questions by dimension
+  const groups = {};
+  for (const q of QUESTIONS) {
+    if (!groups[q.dimension]) groups[q.dimension] = [];
+    groups[q.dimension].push(q);
+  }
+
+  // Shuffle dimension order, then shuffle within each group
+  const dimOrder = shuffle(Object.keys(groups));
+  const result = [];
+  for (const dim of dimOrder) {
+    result.push(...shuffle(groups[dim]));
+  }
+
+  // Hidden questions stay at the end
+  result.push(...HIDDEN_QUESTIONS);
+  return result;
+}
 
 // ==================== 算法引擎 ====================
 
@@ -111,7 +149,9 @@ function checkEasterEggs(hiddenAnswers, matchResult) {
 // ==================== UI 渲染 ====================
 
 function getAllQuestions() {
-  return [...QUESTIONS, ...HIDDEN_QUESTIONS];
+  return state.shuffledQuestions.length > 0
+    ? state.shuffledQuestions
+    : [...QUESTIONS, ...HIDDEN_QUESTIONS];
 }
 
 /**
@@ -125,7 +165,7 @@ function renderWelcome() {
     <!-- Top Banner -->
     <div class="top-banner">
       NEW 已支持 AITI 交叉解读，完成测试后即可解锁
-      <span>2026 · v1.0</span>
+      <span>2026 · v1.0 · by sikm</span>
     </div>
 
     <!-- Hero Card -->
@@ -498,6 +538,7 @@ function startTest() {
   state.hiddenAnswers = {};
   state.userVector = [];
   state.result = null;
+  state.shuffledQuestions = shuffleQuestions();
   renderQuestion();
 }
 

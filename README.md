@@ -3,13 +3,19 @@
 > **你是 Prompt 原教旨主义者，还是散装提示词野生党？**
 > 26 道趣味问答，测出你的 AI 使用人格！
 
+[English](./README_EN.md)
+
 ## 这是啥？
 
 AITI (AI Temperament Inventory) 是一个 AI 使用人格测试，通过分析你的提示词风格、AI 关系投射、使用场景和伦理态度，匹配出 25+ 种搞笑梗风格的人格类型。
 
+**What is this?** AITI is a personality test for your AI usage habits. It analyzes your prompt style, emotional projection toward AI, usage scenarios, and ethical attitudes to match you with one of 25+ humorous personality types.
+
 ## 在线体验
 
-[点击开始测试 →](https://your-username.github.io/aiti/)
+[点击开始测试 →](https://cmyandlqs.github.io/AITI/)
+
+![AITI 主页](assets/images/网页主页.jpg)
 
 ## 人格预览
 
@@ -37,8 +43,8 @@ AITI (AI Temperament Inventory) 是一个 AI 使用人格测试，通过分析�
 
 ```bash
 # 克隆项目
-git clone https://github.com/your-username/aiti.git
-cd aiti
+git clone https://github.com/cmyandlqs/AITI.git
+cd AITI
 
 # 直接打开即可
 open index.html
@@ -50,7 +56,7 @@ python -m http.server 8080
 ## 项目结构
 
 ```
-aiti/
+AITI/
 ├── index.html           # 主页面
 ├── src/
 │   ├── data/

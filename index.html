@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AITI - AI 使用人格测试</title>
+  <meta name="description" content="26道趣味问答，测出你的 AI 使用人格！你是 Prompt 原教旨主义者还是散装提示词野生党？" />
+  <meta name="keywords" content="AITI, AI人格测试, ChatGPT, Claude, 提示词工程, MBTI" />
+  <meta property="og:title" content="AITI - AI 使用人格测试" />
+  <meta property="og:description" content="26道趣味问答，测出你的 AI 使用人格！" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" />
+  <style>
+    /* ========== Reset & Base ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f4f7f4;
+      --card: #ffffff;
+      --primary: #3b5944;
+      --primary-hover: #2f4a38;
+      --primary-light: rgba(59,89,68,0.08);
+      --text: #1a1a1a;
+      --text-secondary: #6b7280;
+      --text-tertiary: #9ca3af;
+      --border: #e5e7eb;
+      --surface: #f9fafb;
+      --radius-sm: 12px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.03);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial,
+        "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ========== Scrollbar ========== */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
+    /* ========== Animations ========== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+    .animate-slide-up { animation: slideUp 0.6s ease-out forwards; }
+    .animate-scale-in { animation: scaleIn 0.4s ease-out forwards; }
+
+    /* ========== Banner ========== */
+    .top-banner {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .top-banner span { opacity: 0.7; margin-left: 8px; font-size: 12px; }
+
+    /* ========== Hero Card ========== */
+    .hero-card {
+      max-width: 820px;
+      margin: 40px auto;
+      padding: 48px;
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+    .hero-pill {
+      display: inline-block;
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      letter-spacing: 0.03em;
+    }
+    .hero-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .hero-subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+    .hero-info-block {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+    .hero-info-block h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .hero-info-block ul {
+      list-style: none;
+      padding: 0;
+    }
+    .hero-info-block li {
+      font-size: 14px;
+      color: var(--text-secondary);
+      padding: 5px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-info-block li::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      background: var(--primary);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 16px 36px;
+      border-radius: var(--radius-lg);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59,89,68,0.25);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    /* ========== Personality Gallery ========== */
+    .gallery-section {
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      padding: 0 24px;
+    }
+    .gallery-header {
+      margin-bottom: 24px;
+    }
+    .gallery-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .gallery-title .arrow { color: var(--primary); font-weight: 400; }
+    .gallery-subtitle {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-top: 4px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .personality-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 24px 20px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .personality-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--border);
+    }
+    .personality-card .card-label {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-bottom: 10px;
+      letter-spacing: 0.03em;
+    }
+    .personality-card .card-emoji {
+      font-size: 40px;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .personality-card .card-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .personality-card .card-code {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 0.08em;
+    }
+    .personality-card .card-rarity {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-top: 8px;
+    }
+
+    /* ========== Quiz Page ========== */
+    .quiz-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+    }
+    .quiz-progress-wrap {
+      position: sticky;
+      top: 0;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      z-index: 10;
+    }
+    .quiz-progress-info {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .quiz-progress-dim {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .quiz-progress-count {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      font-variant-numeric: tabular-nums;
+    }
+    .quiz-progress-bar {
+      max-width: 640px;
+      margin: 0 auto;
+      width: 100%;
+      background: var(--surface);
+      border-radius: 999px;
+      height: 4px;
+      overflow: hidden;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 999px;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .quiz-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+    }
+    .quiz-question-wrap {
+      max-width: 640px;
+      width: 100%;
+    }
+    .quiz-question-text {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 36px;
+      line-height: 1.4;
+    }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .quiz-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      text-align: left;
+      padding: 18px 22px;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 15px;
+      color: var(--text);
+      transition: all 0.2s ease;
+      line-height: 1.5;
+    }
+    .quiz-option:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      transform: translateX(4px);
+    }
+    .quiz-option:active { transform: scale(0.99); }
+    .quiz-option .opt-emoji {
+      font-size: 22px;
+      flex-shrink: 0;
+      width: 28px;
+      text-align: center;
+    }
+    .quiz-option .opt-text {
+      flex: 1;
+    }
+
+    /* ========== Result Page ========== */
+    .result-container {
+      min-height: 100vh;
+      background: var(--bg);
+      padding: 32px 24px 60px;
+    }
+    .result-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .result-main-card {
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      padding: 48px 36px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 20px;
+    }
+    .result-emoji {
+      font-size: 64px;
+      margin-bottom: 16px;
+    }
+    .result-name {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .result-code {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .result-rarity-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .result-tagline {
+      font-size: 16px;
+      color: var(--text-secondary);
+      font-style: italic;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+    .result-desc-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 20px;
+    }
+    .result-desc-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      white-space: pre-line;
+    }
+    .result-sw-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 20px;
+    }
+    .result-sw-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .result-sw-col h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .result-sw-col ul {
+      list-style: none;
+      padding: 0;
+    }
+    .result-sw-col li {
+      font-size: 14px;
+      color: var(--text-secondary);
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .result-radar-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .result-dims-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .result-dim-item {
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      padding: 14px 8px;
+      text-align: center;
+    }
+    .result-dim-item .dim-code {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-bottom: 4px;
+    }
+    .result-dim-item .dim-val {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .result-dim-item .dim-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+    .result-match-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+    }
+    .result-match-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 0;
+    }
+    .result-match-item + .result-match-item {
+      border-top: 1px solid var(--border);
+    }
+    .result-match-item .match-emoji { font-size: 24px; }
+    .result-match-item .match-info { flex: 1; }
+    .result-match-item .match-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .result-match-item .match-bar {
+      width: 100%;
+      background: var(--surface);
+      border-radius: 999px;
+      height: 5px;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+    .result-match-item .match-bar-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 999px;
+      transition: width 0.6s ease;
+    }
+    .result-match-item .match-pct {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      font-variant-numeric: tabular-nums;
+      min-width: 40px;
+      text-align: right;
+    }
+    .result-actions {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .btn-share {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--primary);
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 24px;
+      border-radius: var(--radius-lg);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-share:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+    .btn-restart {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--card);
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 24px;
+      border-radius: var(--radius-lg);
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-restart:hover {
+      background: var(--surface);
+      border-color: var(--primary);
+    }
+    .result-footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      padding-bottom: 20px;
+    }
+    .result-footer p + p { margin-top: 4px; }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 768px) {
+      .hero-card {
+        margin: 20px 16px;
+        padding: 28px 22px;
+        border-radius: var(--radius-lg);
+      }
+      .hero-title { font-size: 26px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .gallery-section { padding: 0 16px; }
+      .gallery-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 12px;
+        padding-bottom: 12px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+      .personality-card {
+        min-width: 170px;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+      }
+      .quiz-question-text { font-size: 18px; }
+      .result-main-card { padding: 36px 24px; }
+      .result-name { font-size: 24px; }
+      .result-sw-grid { grid-template-columns: 1fr; }
+      .result-dims-grid { grid-template-columns: repeat(3, 1fr); }
+      .result-actions { flex-direction: column; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-card { padding: 22px 18px; }
+      .hero-title { font-size: 22px; }
+      .btn-primary { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- 数据文件 -->
+  <script src="src/data/questions.js"></script>
+  <script src="src/data/templates.js"></script>
+  <!-- 主逻辑 -->
+  <script src="src/app.js"></script>
+</body>
+</html>

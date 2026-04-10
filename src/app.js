@@ -198,6 +198,9 @@ function renderWelcome() {
       </div>
 
       <button onclick="startTest()" class="btn-primary">开始测试 →</button>
+      <div style="margin-top:16px;text-align:center;">
+        <a href="https://github.com/cmyandlqs/AITI" target="_blank" style="color:var(--text-tertiary);font-size:13px;text-decoration:none;">GitHub →</a>
+      </div>
     </div>
 
     <!-- Personality Gallery -->
@@ -377,15 +380,14 @@ function renderResult() {
 
         <!-- 操作按钮 -->
         <div class="result-actions animate-slide-up" style="animation-delay: 0.5s">
-          <button onclick="shareResult()" class="btn-share">分享结果</button>
-          <button onclick="generatePoster()" class="btn-restart">生成分享海报</button>
-          <button onclick="restartTest()" class="btn-restart" style="margin-top:0">重新测试</button>
+          <button onclick="generatePoster()" class="btn-share">生成分享海报</button>
+          <button onclick="restartTest()" class="btn-restart">重新测试</button>
         </div>
 
         <!-- Footer -->
         <div class="result-footer">
           <p>AITI - AI 使用人格测试 · 仅供娱乐</p>
-          <p>灵感来自 SBTI · 开源项目欢迎 Star ⭐</p>
+          <p>灵感来自 SBTI · <a href="https://github.com/cmyandlqs/AITI" target="_blank" style="color:var(--primary);text-decoration:none;">开源项目欢迎 Star ⭐</a></p>
           <p><img src="assets/images/方源大头照.jpg" class="footer-avatar" /> sikm</p>
         </div>
 

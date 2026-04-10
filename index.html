@@ -617,10 +617,229 @@
       .hero-title { font-size: 22px; }
       .btn-primary { width: 100%; justify-content: center; }
     }
+
+    /* ========== Share Poster ========== */
+    .poster-card {
+      width: 450px;
+      height: 800px;
+      background: linear-gradient(170deg, #f4f7f4 0%, #e8efe8 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 32px 28px;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+    .poster-card::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: var(--primary);
+      opacity: 0.06;
+    }
+    .poster-brand {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .poster-slogan {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-bottom: 28px;
+    }
+    .poster-emoji {
+      font-size: 88px;
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+    .poster-name {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+    .poster-code {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.12em;
+      margin-bottom: 16px;
+    }
+    .poster-tagline {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-style: italic;
+      margin-bottom: 20px;
+      text-align: center;
+      line-height: 1.6;
+      padding: 0 16px;
+    }
+    .poster-rarity {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    .poster-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      text-align: center;
+      padding: 0 12px;
+      max-height: 108px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+    }
+    .poster-footer {
+      margin-top: auto;
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .poster-qr-side {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .poster-qr-side canvas {
+      border-radius: 6px;
+    }
+    .poster-qr-text {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      line-height: 1.6;
+    }
+    .poster-author-side {
+      text-align: right;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      line-height: 1.6;
+    }
+    .poster-author-side .author-name {
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    /* ========== Poster Modal ========== */
+    .poster-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .poster-modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+    }
+    .poster-modal-body {
+      position: relative;
+      z-index: 1;
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      padding: 28px 24px;
+      max-width: 480px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+    }
+    .poster-modal-title {
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+    .poster-preview-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .poster-preview-wrap img {
+      max-width: 100%;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+    }
+    .poster-modal-actions {
+      display: flex;
+      gap: 12px;
+    }
+    .poster-btn-download {
+      flex: 1;
+      padding: 14px 20px;
+      background: var(--primary);
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .poster-btn-download:hover { background: var(--primary-hover); }
+    .poster-btn-close {
+      flex: 1;
+      padding: 14px 20px;
+      background: var(--card);
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .poster-btn-close:hover { border-color: var(--primary); }
+
+    @media (max-width: 768px) {
+      .poster-modal-body { padding: 20px 16px; }
+    }
   </style>
 </head>
 <body>
   <div id="app"></div>
+
+  <!-- 海报离屏容器 -->
+  <div id="poster-container" style="position:fixed;left:-9999px;top:0;z-index:-1;"></div>
+
+  <!-- 模态框 -->
+  <div id="poster-modal" class="poster-modal" style="display:none;">
+    <div class="poster-modal-overlay" onclick="closePosterModal()"></div>
+    <div class="poster-modal-body">
+      <div class="poster-modal-title">分享海报预览</div>
+      <div id="poster-preview-wrap" class="poster-preview-wrap"></div>
+      <div class="poster-modal-actions">
+        <button onclick="downloadPoster()" class="poster-btn-download">下载图片</button>
+        <button onclick="closePosterModal()" class="poster-btn-close">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CDN 依赖 -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 
   <!-- 数据文件 -->
   <script src="src/data/questions.js"></script>

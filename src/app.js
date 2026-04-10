@@ -378,7 +378,8 @@ function renderResult() {
         <!-- 操作按钮 -->
         <div class="result-actions animate-slide-up" style="animation-delay: 0.5s">
           <button onclick="shareResult()" class="btn-share">分享结果</button>
-          <button onclick="restartTest()" class="btn-restart">重新测试</button>
+          <button onclick="generatePoster()" class="btn-restart">生成分享海报</button>
+          <button onclick="restartTest()" class="btn-restart" style="margin-top:0">重新测试</button>
         </div>
 
         <!-- Footer -->
@@ -570,6 +571,97 @@ function shareResult() {
   } else {
     alert(text);
   }
+}
+
+// ==================== 分享海报 ====================
+
+let posterDataURL = null;
+
+function generatePoster() {
+  const personality = state.result.easterEgg || state.result.match.primary;
+  const container = document.getElementById("poster-container");
+
+  // Generate QR code
+  const qrCanvas = document.createElement("canvas");
+  new QRious({
+    element: qrCanvas,
+    value: "https://cmyandlqs.github.io/AITI/",
+    size: 80,
+    backgroundAlpha: 0,
+    foreground: "#3b5944",
+    level: "M",
+  });
+
+  // Short description: first paragraph only, strip "恭喜你..."
+  const descText = personality.description
+    .split("\n\n")
+    .filter(p => !p.startsWith("恭喜你"))
+    .slice(0, 2)
+    .join(" ")
+    .replace(/\n/g, " ")
+    .slice(0, 120);
+
+  container.innerHTML = `
+    <div class="poster-card">
+      <div class="poster-brand">AITI</div>
+      <div class="poster-slogan">发现你的 AI 交互基因</div>
+      <div class="poster-emoji">${personality.emoji}</div>
+      <div class="poster-name">${personality.name}</div>
+      <div class="poster-code">${personality.code}</div>
+      <div class="poster-rarity">${personality.rarity}${personality.rarityPercent > 0 ? " · 仅 " + personality.rarityPercent + "% 的人" : ""}</div>
+      <div class="poster-tagline">"${personality.tagline}"</div>
+      <div class="poster-desc">${descText}</div>
+      <div class="poster-footer">
+        <div class="poster-qr-side">
+          <div id="poster-qr-slot"></div>
+          <div class="poster-qr-text">长按识别二维码<br/>测试你的 AI 人格</div>
+        </div>
+        <div class="poster-author-side">
+          <div class="author-name">by sikm</div>
+          <div>cmyandlqs.github.io/AITI</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Insert QR canvas
+  document.getElementById("poster-qr-slot").appendChild(qrCanvas);
+
+  // Render to image
+  html2canvas(container.firstElementChild, {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: null,
+    width: 450,
+    height: 800,
+  }).then((canvas) => {
+    posterDataURL = canvas.toDataURL("image/png");
+    showPosterModal();
+    // Clean up offscreen
+    container.innerHTML = "";
+  });
+}
+
+function showPosterModal() {
+  const modal = document.getElementById("poster-modal");
+  const preview = document.getElementById("poster-preview-wrap");
+  preview.innerHTML = `<img src="${posterDataURL}" alt="分享海报" />`;
+  modal.style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+
+function closePosterModal() {
+  document.getElementById("poster-modal").style.display = "none";
+  document.body.style.overflow = "";
+}
+
+function downloadPoster() {
+  if (!posterDataURL) return;
+  const personality = state.result.easterEgg || state.result.match.primary;
+  const a = document.createElement("a");
+  a.href = posterDataURL;
+  a.download = `AITI-${personality.code}.png`;
+  a.click();
 }
 
 // ==================== 启动 ====================

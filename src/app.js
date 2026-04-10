@@ -165,7 +165,7 @@ function renderWelcome() {
     <!-- Top Banner -->
     <div class="top-banner">
       NEW 已支持 AITI 交叉解读，完成测试后即可解锁
-      <span>2026 · v1.0 · by sikm</span>
+      <span>2026 · v1.0 · <img src="assets/images/方源大头照.jpg" class="banner-avatar" /> sikm</span>
     </div>
 
     <!-- Hero Card -->

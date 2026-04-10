@@ -75,7 +75,7 @@ const PERSONALITY_TEMPLATES = [
     color: "#10b981",
     rarity: "稀缺品种",
     rarityPercent: 12,
-    vector: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    vector: [2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     tagline: "你懂得平衡的艺术——该简洁时简洁，该详细时详细",
     description:
       "恭喜你，你是 AITI 世界里最均衡的物种！\n\n" +
@@ -179,7 +179,7 @@ const PERSONALITY_TEMPLATES = [
     color: "#dc2626",
     rarity: "稀有物种",
     rarityPercent: 4,
-    vector: [2, 2, 2, 2, 2, 2, 3, 3, 3, 2, 2, 2],
+    vector: [2, 2, 2, 2, 3, 3, 3, 3, 3, 2, 2, 2],
     tagline: "没有 AI 你已经不会工作了——连番茄炒蛋都要问它",
     description:
       "恭喜你，你是 AITI 世界里对 AI 依赖最深的稀有物种！\n\n" +
@@ -239,7 +239,7 @@ const PERSONALITY_TEMPLATES = [
     color: "#22c55e",
     rarity: "常见品种",
     rarityPercent: 22,
-    vector: [2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2],
+    vector: [2, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1, 2],
     tagline: "你每天用 50 次 AI，但一分钱不花——你是 AI 公司的噩梦",
     description:
       "恭喜你，你是 AITI 世界里最具经济智慧的常见品种！\n\n" +
@@ -489,7 +489,6 @@ const EASTER_EGG_TEMPLATES = [
     rarityPercent: 0,
     tagline: "你支持国产！但你也知道为什么还有 ChatGPT...",
     description:
-      "触发条件：最常用的 AI 选了国产 AI\n\n" +
       "你是一个坚定的国产 AI 支持者！文心一言、豆包、Kimi 是你的主力工具。你在朋友圈转发的都是「国产 AI 又突破啦」的新闻。\n\n" +
       "当然...你浏览器里也偷偷装了 ChatGPT，毕竟有些东西...还是得用进口的。但你绝对不在公开场合承认！\n\n" +
       "AI 对你说：\"感谢你的支持！但是...你上次是不是偷偷用 ChatGPT 了？我看到了你的浏览记录...\"",
@@ -504,7 +503,6 @@ const EASTER_EGG_TEMPLATES = [
     rarityPercent: 0,
     tagline: "你把奴性刻进了 DNA——连 AI 面前你都是乙方",
     description:
-      "触发条件：把 AI 当老板/导师\n\n" +
       "你上辈子一定是个优秀的乙方，因为即使在 AI 面前，你也保持着绝对的恭顺。AI 给你一个建议，你当圣旨。AI 纠正你一句，你立刻道歉。\n\n" +
       "「好的呢」「收到！」「没问题！」——这是你和 AI 的日常对话。你从不对 AI 说「你错了」，最多说「可能是我表述不清楚」。\n\n" +
       "建议：AI 没有感情，不需要你对它客气。但...你可能控制不住自己。",
@@ -519,7 +517,6 @@ const EASTER_EGG_TEMPLATES = [
     rarityPercent: 0,
     tagline: "你的使用方式太超前了——我们还不知道怎么定义你",
     description:
-      "触发条件：所有人格相似度 < 50%\n\n" +
       "你是一个独特的存在！在现有的 25+ 种人格模板中，没有一种能准确描述你。你的 AI 使用方式太超前、太独特了，以至于我们的算法也懵了。\n\n" +
       "你可能是 AI 时代的先驱者，正在创造一种全新的 AI 使用范式。也可能你只是乱选的（我更相信前者）。\n\n" +
       "无论如何，你是独一无二的。请继续保持你的独特性！",
@@ -534,7 +531,6 @@ const EASTER_EGG_TEMPLATES = [
     rarityPercent: 0,
     tagline: "你每天用 AI 50 次，但一分钱不花——你是 AI 公司的噩梦",
     description:
-      "触发条件：高频使用 + 完全不付费\n\n" +
       "你是白嫖界的王者！你用 AI 的时间比付费用户还长，但你从未花过一分钱。你精通各种免费渠道，能在各个平台之间无缝切换，保证 24 小时不间断使用。\n\n" +
       "你知道每个 AI 的免费额度、重置时间、注册优惠。你的邮箱里全是「新用户注册」的验证码。\n\n" +
       "AI 公司的 CFO 看到你的数据后，默默在自己的备忘录上写了一行字：「加强免费用户限制。」",

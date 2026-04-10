@@ -385,6 +385,7 @@ function renderResult() {
         <div class="result-footer">
           <p>AITI - AI 使用人格测试 · 仅供娱乐</p>
           <p>灵感来自 SBTI · 开源项目欢迎 Star ⭐</p>
+          <p><img src="assets/images/方源大头照.jpg" class="footer-avatar" /> sikm</p>
         </div>
 
       </div>
